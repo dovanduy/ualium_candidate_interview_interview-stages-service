@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Ualium.Candidate.Interview.CandidateInterviewStagesServiceContract</RootNamespace>
+    <AssemblyVersion>1.0.3.0</AssemblyVersion>
+    <FileVersion>1.0.3.0</FileVersion>
+    <Version>1.0.3</Version>
+    <AssemblyName>CandidateInterviewStagesServiceContract</AssemblyName>
+    <Company>Ualium</Company>
+    <Authors>Oleg Krums</Authors>
+    <PackageId>Ualium.Candidate.Interview.CandidateInterviewStagesServiceContract</PackageId>
+    <Product>Ualium</Product>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ualium.Candidate.EmployerInfoServiceContracts" Version="1.0.3" />
+  </ItemGroup>
+
+</Project>

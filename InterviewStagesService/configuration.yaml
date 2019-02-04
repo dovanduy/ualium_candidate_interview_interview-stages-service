@@ -1,0 +1,47 @@
+﻿---
+SelectedEnvironment: Development
+# Environments : Development / PreProduction / Production
+# CataloguePrifix : DEV_ / PRE_ / PROD_
+Environments:
+#Development
+  Development:
+    RabbitMQ:
+      ManagementPort: 15672
+      NodePort: 5672
+      Host: "localhost"
+      User: "admin"
+      Password: "52s29#bvErgK@Nn1"
+    RelationalDb:
+      DataSource: "OLEG-KRUMS\\SQLEXPRESS"
+      CataloguePrifix: "DEV_"
+      Catalog: "UaliumInterviewStagesService"
+      UserId: "CandidateUser"
+      Password: "Uassword@123_4"
+#PreProduction
+  PreProduction:
+    RabbitMQ:
+      ManagementPort: 15672
+      NodePort: 5672
+      Host: "localhost"
+      User: "admin"
+      Password: "52s29#bvErgK@Nn1"
+    RelationalDb:
+      DataSource: "OLEG-KRUMS\\SQLEXPRESS"
+      CataloguePrifix: "PRE_"
+      Catalog: "UaliumInterviewStagesService"
+      UserId: "CandidateUser"
+      Password: "Uassword@123_4"
+#Production
+  Production:
+    RabbitMQ:
+      ManagementPort: 15672
+      NodePort: 5672
+      Host: "localhost"
+      User: "admin"
+      Password: "52s29#bvErgK@Nn1"
+    RelationalDb:
+      DataSource: "OLEG-KRUMS\\SQLEXPRESS"
+      CataloguePrifix: "PROD_"
+      Catalog: "UaliumInterviewStagesService"
+      UserId: "CandidateUser"
+      Password: "Uassword@123_4"
