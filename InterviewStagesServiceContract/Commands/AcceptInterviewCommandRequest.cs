@@ -5,14 +5,18 @@ namespace Ualium.Candidate.Interview.CandidateInterviewStagesServiceContract.Com
     public interface IAcceptInterviewCommandRequest
     {
         Guid CandidateId { get; set; }
+        Guid CandidateInterviewStageId { get; set; }
         Guid EmployerPositionId { get; set; }
+        int InterviewStageEnum { get; set; }
         DateTime WhenAcceptedUtc { get; set; }
     }
 
     public class AcceptInterviewCommandRequest : IAcceptInterviewCommandRequest
     {
         public Guid CandidateId { get; set; }
+        public Guid CandidateInterviewStageId { get; set; }
         public Guid EmployerPositionId { get; set; }
+        public int InterviewStageEnum { get; set; }
         public DateTime WhenAcceptedUtc { get; set; }
     }
 }

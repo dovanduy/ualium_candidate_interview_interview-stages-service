@@ -7,7 +7,6 @@ namespace Ualium.Candidate.Interview.InterviewStagesService.Entities
     {
         public Guid CandidateInterviewStageId { get; set; }
         public Guid CandidateId { get; set; }
-        public Guid EmployerId { get; set; }
         public Guid EmployerPositionId { get; set; }
         public IList<Interview> Interviews { get; set; }
     }
@@ -19,7 +18,7 @@ namespace Ualium.Candidate.Interview.InterviewStagesService.Entities
         public EmployerFeedback EmployerFeedback { get; set; }
         public InterviewStageEnum InterviewStageEnum { get; private set; }
         public InterviewStatusEnum InterviewStatusEnum { get; set; }
-        public DateTime WhenInterviewCompleted { get; set; }
+        public DateTime? WhenInterviewCompleted { get; set; }
 
         public void ChangeInterviewStage(InterviewStageEnum interviewStage)
         {

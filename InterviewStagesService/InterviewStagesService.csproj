@@ -47,8 +47,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CandidateInterviewStagesServiceContract, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Ualium.Candidate.Interview.CandidateInterviewStagesServiceContract.1.0.3\lib\netstandard2.0\CandidateInterviewStagesServiceContract.dll</HintPath>
+    <Reference Include="CandidateInterviewStagesServiceContract, Version=1.0.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ualium.Candidate.Interview.CandidateInterviewStagesServiceContract.1.0.8\lib\netstandard2.0\CandidateInterviewStagesServiceContract.dll</HintPath>
     </Reference>
     <Reference Include="EmployerInfoServiceContracts, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Ualium.Candidate.EmployerInfoServiceContracts.1.0.3\lib\netstandard2.0\EmployerInfoServiceContracts.dll</HintPath>
@@ -193,7 +193,9 @@
     <Compile Include="Entities\CandidateFeedback.cs" />
     <Compile Include="Entities\InterviewStageEnum.cs" />
     <Compile Include="Entities\InterviewStatusEnum.cs" />
-    <Compile Include="Handlers\EmployerMessageSentEventHandler.cs" />
+    <Compile Include="Handlers\AcceptInterviewCommandHandler.cs" />
+    <Compile Include="Handlers\DeclineInterviewRequestCommandHandler.cs" />
+    <Compile Include="Handlers\AcceptInterviewRequestCommandHandler.cs" />
     <Compile Include="InterviewStagesServiceDbContext.cs" />
     <Compile Include="ServiceContainer.cs">
       <SubType>Component</SubType>

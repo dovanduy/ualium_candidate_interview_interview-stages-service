@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Ualium.Candidate.EmployerInfoServiceContracts.Shared;
+using Ualium.Candidate.Interview.CandidateInterviewStagesServiceContract.Shared;
 
 namespace Ualium.Candidate.Interview.CandidateInterviewStagesServiceContract.Commands
 {

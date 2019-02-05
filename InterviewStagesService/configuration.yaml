@@ -14,7 +14,7 @@ Environments:
     RelationalDb:
       DataSource: "OLEG-KRUMS\\SQLEXPRESS"
       CataloguePrifix: "DEV_"
-      Catalog: "UaliumInterviewStagesService"
+      Catalog: "UaliumCandidateInterviewStagesService"
       UserId: "CandidateUser"
       Password: "Uassword@123_4"
 #PreProduction
@@ -28,7 +28,7 @@ Environments:
     RelationalDb:
       DataSource: "OLEG-KRUMS\\SQLEXPRESS"
       CataloguePrifix: "PRE_"
-      Catalog: "UaliumInterviewStagesService"
+      Catalog: "UaliumCandidateInterviewStagesService"
       UserId: "CandidateUser"
       Password: "Uassword@123_4"
 #Production
@@ -42,6 +42,6 @@ Environments:
     RelationalDb:
       DataSource: "OLEG-KRUMS\\SQLEXPRESS"
       CataloguePrifix: "PROD_"
-      Catalog: "UaliumInterviewStagesService"
+      Catalog: "UaliumCandidateInterviewStagesService"
       UserId: "CandidateUser"
       Password: "Uassword@123_4"

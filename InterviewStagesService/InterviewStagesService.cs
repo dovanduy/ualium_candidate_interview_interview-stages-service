@@ -1,6 +1,7 @@
 ﻿using MassTransit;
 using NLog;
 using System;
+using Ualium.Candidate.Interview.InterviewStagesService.Handlers;
 using Ualium.ServiceConfigurator;
 
 namespace Ualium.Candidate.Interview.InterviewStagesService
@@ -50,20 +51,20 @@ namespace Ualium.Candidate.Interview.InterviewStagesService
                 x.ReceiveEndpoint(host, CandidateInterviewStagesServiceContract.RabbitMqQueues.Ualium_External_Candidate_Interview_AcceptInterviewRequest_Command, e =>
                 {
                     e.PrefetchCount = 50;
-                    //e.Consumer<>();
+                    e.Consumer<AcceptInterviewRequestCommandHandler>();
                 });
 
                 x.ReceiveEndpoint(host, CandidateInterviewStagesServiceContract.RabbitMqQueues.Ualium_External_Candidate_Interview_DeclineInterviewRequest_Command, e =>
                 {
                     e.PrefetchCount = 50;
-                    //e.Consumer<>();
+                    e.Consumer<DeclineInterviewRequestCommandHandler>();
                 });
 
 
                 x.ReceiveEndpoint(host, CandidateInterviewStagesServiceContract.RabbitMqQueues.Ualium_External_Candidate_Interview_AcceptInterview_Command, e =>
                 {
                     e.PrefetchCount = 50;
-                    //e.Consumer<>();
+                    e.Consumer<AcceptInterviewCommandHandler>();
                 });
 
                 x.ReceiveEndpoint(host, CandidateInterviewStagesServiceContract.RabbitMqQueues.Ualium_External_Candidate_Interview_DeclineInterview_Command, e =>
@@ -98,6 +99,8 @@ namespace Ualium.Candidate.Interview.InterviewStagesService
                     e.PrefetchCount = 50;
                     //e.Consumer<>();
                 });
+
+                /* Events */
             });
         }
 

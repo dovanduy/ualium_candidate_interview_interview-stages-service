@@ -3,11 +3,11 @@
     public enum InterviewStatusEnum
     {
         None = 0,
-        Skip = 1,
-        CandidateAccepted = 2,
-        CandidateDeclined = 3,
-        EmployerAccepted = 4,
-        EmployerDeclined = 5,
-        Pending = 6
+        CandidateAcceptedEmployerDeclined = 1,
+        EmployerAcceptedCandidateDeclined = 2,
+        CandidateAcceptedEmployerPending = 3,
+        EmployerAcceptedCandidatePending = 4,
+        CandidateEmployerAccepted = 5,
+        CandidateEmployerDeclined = 6
     }
 }
