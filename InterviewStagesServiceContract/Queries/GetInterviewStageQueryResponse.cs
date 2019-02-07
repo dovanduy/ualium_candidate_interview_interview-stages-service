@@ -3,15 +3,15 @@ using Ualium.Candidate.Interview.CandidateInterviewStagesServiceContract.Shared;
 
 namespace Ualium.Candidate.Interview.CandidateInterviewStagesServiceContract.Queries
 {
-    public interface IGetInterviewStagesResponse
+    public interface IGetInterviewStageQueryResponse
     {
+        CandidateInterviewStage CandidateInterviewStage { get; set; }
         IList<Error> Errors { get; set; }
-        IList<CandidateInterviewStage> CandidateInterviewStages { get; set; }
     }
 
-    public class GetInterviewStagesResponse : IGetInterviewStagesResponse
+    public class GetInterviewStageQueryResponse : IGetInterviewStageQueryResponse
     {
-        public IList<CandidateInterviewStage> CandidateInterviewStages { get; set; }
+        public CandidateInterviewStage CandidateInterviewStage { get; set; }
         public IList<Error> Errors { get; set; }
     }
 }

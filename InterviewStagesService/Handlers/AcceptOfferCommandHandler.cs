@@ -10,34 +10,33 @@ using Ualium.Candidate.Interview.InterviewStagesService.Entities;
 
 namespace Ualium.Candidate.Interview.InterviewStagesService.Handlers
 {
-    public class AcceptInterviewCommandHandler : IConsumer<IAcceptInterviewCommandRequest>
+    public class AcceptOfferCommandHandler : IConsumer<IAcceptOfferCommandRequest>
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        public async Task Consume(ConsumeContext<IAcceptInterviewCommandRequest> context)
+        public async Task Consume(ConsumeContext<IAcceptOfferCommandRequest> context)
         {
             await Task.Factory.StartNew(() =>
             {
                 /*
-                * Create New Candidate Interview which is part of CandidateInterviewStage and is Initiated
-                * when Candidate Accepts/Declines Employer Interview request.
+                * Save Accepted Candiddate Offer 
                 */
                 try
                 {
                     using (var connection = new SqlConnection(InterviewStagesServiceDbContext.Connectionstring.GetConnection))
                     {
-                        /* Create New Candidate Interview which part of CandidateInterviewStage */
+                        /* Create New Candidate Interview which is part of CandidateInterviewStage */
                         connection.Open();
 
                         var insertInterviewCmd = connection.CreateCommand();
                         insertInterviewCmd.Parameters.AddWithValue("CandidateId", context.Message.CandidateId);
+                        insertInterviewCmd.Parameters.AddWithValue("EmployerPositionId", context.Message.EmployerPositionId);
                         insertInterviewCmd.Parameters.AddWithValue("WhenStatusChangedUtc", context.Message.WhenStatusChangedUtc);
-                        insertInterviewCmd.Parameters.AddWithValue("InterviewStageEnum", context.Message.InterviewStageEnum);
+                        insertInterviewCmd.Parameters.AddWithValue("InterviewStageEnum", InterviewStageEnum.Offer);
                         insertInterviewCmd.Parameters.AddWithValue("InterviewStatusEnum", InterviewStatusEnum.CandidateAcceptedEmployerPending);
-                        insertInterviewCmd.Parameters.AddWithValue("CandidateInterviewStage_CandidateInterviewStageId", context.Message.CandidateInterviewStageId);
 
                         var insertInterviewSql = @"
-                            DECLARE @InterviewId uniqueidentifier = '00000000-0000-0000-0000-000000000000';
+                            DECLARE @InterviewId uniqueidentifier = NEWID();
 
                             SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
                             BEGIN TRANSACTION
@@ -45,40 +44,27 @@ namespace Ualium.Candidate.Interview.InterviewStagesService.Handlers
                                   1
                                 FROM [dbo].[Interviews]
                                 WITH (UPDLOCK)
-                                WHERE CandidateInterviewStage_CandidateInterviewStageId = @CandidateInterviewStage_CandidateInterviewStageId)
+                                WHERE CandidateInterviewStage_CandidateInterviewStageId = @EmployerPositionId)
 
-                                SET @InterviewId = NEWID();
-
-                                INSERT INTO [dbo].[Interviews] (InterviewId, InterviewStageEnum, InterviewStatusEnum, WhenInterWhenStatusChangedUtcviewStatusChanged, CandidateInterviewStage_CandidateInterviewStageId)
+                                INSERT INTO [dbo].[Interviews] (InterviewId, InterviewStageEnum, InterviewStatusEnum, WhenStatusChangedUtc, CandidateInterviewStage_CandidateInterviewStageId)
                                   VALUES (@InterviewId, @InterviewStageEnum, @InterviewStatusEnum, @WhenStatusChangedUtc, @CandidateInterviewStage_CandidateInterviewStageId)
-                            COMMIT;
-
-                            SELECT @InterviewId;";
+                            COMMIT;";
 
                         insertInterviewCmd.CommandText = insertInterviewSql;
-                        var reader = insertInterviewCmd.ExecuteReader();
-                        var interviewId = Guid.Empty;
-
-                        while (reader.Read())
-                        {
-                            interviewId = reader.GetGuid(0);
-                        }
+                        insertInterviewCmd.ExecuteNonQuery();
 
                         connection.Close();
 
-                        context.Respond(new AcceptInterviewCommandResponse
-                        {
-                            InterviewId = interviewId
-                        });
+                        context.Respond(new AcceptOfferCommandResponse());
                     }
                 }
                 catch (Exception ex)
                 {
-                    const string message = "Could not insert Candidate Interview.";
+                    const string message = "Could not insert Candidate Accepted Offer.";
 
                     Logger.Error($"{message} {ex.Message}");
 
-                    var response = new AcceptInterviewCommandResponse {Errors = new List<Error>()};
+                    var response = new AcceptOfferCommandResponse { Errors = new List<Error>()};
                     response.Errors.Add(new Error(23001, ex.Message, message));
 
                     throw new Exception(message, ex);

@@ -6,13 +6,13 @@ namespace Ualium.Candidate.Interview.CandidateInterviewStagesServiceContract.Com
     {
         Guid CandidateId { get; set; }
         Guid EmployerPositionId { get; set; }
-        DateTime WhenOfferDeclinedUtc { get; set; }
+        DateTime WhenStatusChangedUtc { get; set; }
     }
 
     public class DeclineOfferCommandRequest : IDeclineOfferCommandRequest
     {
         public Guid CandidateId { get; set; }
         public Guid EmployerPositionId { get; set; }
-        public DateTime WhenOfferDeclinedUtc { get; set; }
+        public DateTime WhenStatusChangedUtc { get; set; }
     }
 }

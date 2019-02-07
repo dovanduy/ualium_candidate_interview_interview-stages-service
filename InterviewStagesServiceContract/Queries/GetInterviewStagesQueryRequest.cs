@@ -2,12 +2,12 @@
 
 namespace Ualium.Candidate.Interview.CandidateInterviewStagesServiceContract.Queries
 {
-    public interface IGetInterviewStagesRequest
+    public interface IGetInterviewStagesQueryRequest
     {
         Guid CandidateId { get; set; }
     }
 
-    public class GetInterviewStagesRequest : IGetInterviewStagesRequest
+    public class GetInterviewStagesQueryRequest : IGetInterviewStagesQueryRequest
     {
         public Guid CandidateId { get; set; }
     }

@@ -10,18 +10,18 @@ using Ualium.Candidate.Interview.InterviewStagesService.Entities;
 
 namespace Ualium.Candidate.Interview.InterviewStagesService.Handlers
 {
-    public class AcceptInterviewCommandHandler : IConsumer<IAcceptInterviewCommandRequest>
+    public class DeclineInterviewCommandHandler : IConsumer<IDeclineInterviewCommandRequest>
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        public async Task Consume(ConsumeContext<IAcceptInterviewCommandRequest> context)
+        public async Task Consume(ConsumeContext<IDeclineInterviewCommandRequest> context)
         {
             await Task.Factory.StartNew(() =>
             {
                 /*
-                * Create New Candidate Interview which is part of CandidateInterviewStage and is Initiated
-                * when Candidate Accepts/Declines Employer Interview request.
-                */
+                   * Create New Candidate Interview which is part of CandidateInterviewStage and is Initiated
+                   * when Candidate Accepts/Declines Employer Interview request.
+                   */
                 try
                 {
                     using (var connection = new SqlConnection(InterviewStagesServiceDbContext.Connectionstring.GetConnection))
@@ -33,7 +33,7 @@ namespace Ualium.Candidate.Interview.InterviewStagesService.Handlers
                         insertInterviewCmd.Parameters.AddWithValue("CandidateId", context.Message.CandidateId);
                         insertInterviewCmd.Parameters.AddWithValue("WhenStatusChangedUtc", context.Message.WhenStatusChangedUtc);
                         insertInterviewCmd.Parameters.AddWithValue("InterviewStageEnum", context.Message.InterviewStageEnum);
-                        insertInterviewCmd.Parameters.AddWithValue("InterviewStatusEnum", InterviewStatusEnum.CandidateAcceptedEmployerPending);
+                        insertInterviewCmd.Parameters.AddWithValue("InterviewStatusEnum", InterviewStatusEnum.CandidateDeclinedEmployerPending);
                         insertInterviewCmd.Parameters.AddWithValue("CandidateInterviewStage_CandidateInterviewStageId", context.Message.CandidateInterviewStageId);
 
                         var insertInterviewSql = @"
@@ -49,14 +49,14 @@ namespace Ualium.Candidate.Interview.InterviewStagesService.Handlers
 
                                 SET @InterviewId = NEWID();
 
-                                INSERT INTO [dbo].[Interviews] (InterviewId, InterviewStageEnum, InterviewStatusEnum, WhenInterWhenStatusChangedUtcviewStatusChanged, CandidateInterviewStage_CandidateInterviewStageId)
+                                INSERT INTO [dbo].[Interviews] (InterviewId, InterviewStageEnum, InterviewStatusEnum, WhenStatusChangedUtc, CandidateInterviewStage_CandidateInterviewStageId)
                                   VALUES (@InterviewId, @InterviewStageEnum, @InterviewStatusEnum, @WhenStatusChangedUtc, @CandidateInterviewStage_CandidateInterviewStageId)
                             COMMIT;
 
                             SELECT @InterviewId;";
 
                         insertInterviewCmd.CommandText = insertInterviewSql;
-                        var reader = insertInterviewCmd.ExecuteReader();
+                        var reader = insertInterviewCmd.ExecuteReader();  
                         var interviewId = Guid.Empty;
 
                         while (reader.Read())

@@ -70,20 +70,27 @@ namespace Ualium.Candidate.Interview.InterviewStagesService
                 x.ReceiveEndpoint(host, CandidateInterviewStagesServiceContract.RabbitMqQueues.Ualium_External_Candidate_Interview_DeclineInterview_Command, e =>
                 {
                     e.PrefetchCount = 50;
-                    //e.Consumer<>();
+                    e.Consumer<DeclineInterviewCommandHandler>();
                 });
 
 
                 x.ReceiveEndpoint(host, CandidateInterviewStagesServiceContract.RabbitMqQueues.Ualium_External_Candidate_Interview_AcceptOffer_Command, e =>
                 {
                     e.PrefetchCount = 50;
-                    //e.Consumer<>();
+                    e.Consumer<AcceptOfferCommandHandler>();
                 });
 
                 x.ReceiveEndpoint(host, CandidateInterviewStagesServiceContract.RabbitMqQueues.Ualium_External_Candidate_Interview_DeclineOffer_Command, e =>
                 {
                     e.PrefetchCount = 50;
-                    //e.Consumer<>();
+                    e.Consumer<DeclineOfferCommandHandler>();
+                });
+
+
+                x.ReceiveEndpoint(host, CandidateInterviewStagesServiceContract.RabbitMqQueues.Ualium_External_Candidate_Interview_LeaveInterviewFeedback_Command, e =>
+                {
+                    e.PrefetchCount = 50;
+                    e.Consumer<LeaveInterviewFeedbackCommandHandler>();
                 });
 
 
@@ -91,13 +98,13 @@ namespace Ualium.Candidate.Interview.InterviewStagesService
                 x.ReceiveEndpoint(host, CandidateInterviewStagesServiceContract.RabbitMqQueues.Ualium_External_Candidate_Interview_GetInterviewStage_Query, e =>
                 {
                     e.PrefetchCount = 50;
-                    //e.Consumer<>();
+                    e.Consumer<GetInterviewStageQueryHandler>();
                 });
 
                 x.ReceiveEndpoint(host, CandidateInterviewStagesServiceContract.RabbitMqQueues.Ualium_External_Candidate_Interview_GetInterviewStages_Query, e =>
                 {
                     e.PrefetchCount = 50;
-                    //e.Consumer<>();
+                    e.Consumer<GetInterviewStagesQueryHandler>();
                 });
 
                 /* Events */

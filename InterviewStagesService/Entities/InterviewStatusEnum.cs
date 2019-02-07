@@ -7,7 +7,9 @@
         EmployerAcceptedCandidateDeclined = 2,
         CandidateAcceptedEmployerPending = 3,
         EmployerAcceptedCandidatePending = 4,
-        CandidateEmployerAccepted = 5,
-        CandidateEmployerDeclined = 6
+        CandidateDeclinedEmployerPending = 5,
+        EmployerDeclinedCandidatePending = 6,
+        CandidateEmployerAccepted = 7,
+        CandidateEmployerDeclined = 8
     }
 }

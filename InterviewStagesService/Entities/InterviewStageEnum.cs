@@ -4,8 +4,8 @@
     {
         None = 0,
         PhoneInterview = 1,
-        FaceToFaceInterviewing = 2,
-        OfferPending = 3,
+        FaceToFaceInterview = 2,
+        Offer = 3,
         Hired = 4
     }
 }

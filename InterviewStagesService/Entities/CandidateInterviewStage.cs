@@ -18,7 +18,7 @@ namespace Ualium.Candidate.Interview.InterviewStagesService.Entities
         public EmployerFeedback EmployerFeedback { get; set; }
         public InterviewStageEnum InterviewStageEnum { get; private set; }
         public InterviewStatusEnum InterviewStatusEnum { get; set; }
-        public DateTime? WhenInterviewCompleted { get; set; }
+        public DateTime? WhenStatusChangedUtc { get; set; }
 
         public void ChangeInterviewStage(InterviewStageEnum interviewStage)
         {
@@ -26,15 +26,15 @@ namespace Ualium.Candidate.Interview.InterviewStagesService.Entities
             {
                 InterviewStageEnum = interviewStage;
             }
-            else if (InterviewStageEnum == InterviewStageEnum.PhoneInterview && interviewStage == InterviewStageEnum.FaceToFaceInterviewing)
+            else if (InterviewStageEnum == InterviewStageEnum.PhoneInterview && interviewStage == InterviewStageEnum.FaceToFaceInterview)
             {
                 InterviewStageEnum = interviewStage;
             }
-            else if (InterviewStageEnum == InterviewStageEnum.FaceToFaceInterviewing && interviewStage == InterviewStageEnum.Hired)
+            else if (InterviewStageEnum == InterviewStageEnum.FaceToFaceInterview && interviewStage == InterviewStageEnum.Hired)
             {
                 InterviewStageEnum = interviewStage;
             }
-            else if (InterviewStageEnum == InterviewStageEnum.Hired && interviewStage == InterviewStageEnum.OfferPending)
+            else if (InterviewStageEnum == InterviewStageEnum.Hired && interviewStage == InterviewStageEnum.Offer)
             {
                 InterviewStageEnum = interviewStage;
             }

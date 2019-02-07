@@ -7,7 +7,6 @@ namespace Ualium.Candidate.Interview.CandidateInterviewStagesServiceContract.Sha
     {
         public Guid InterviewStageId { get; set; }
         public Guid CandidateId { get; set; }
-        public Guid EmployerId { get; set; }
         public Guid EmployerPositionId { get; set; }
         public IList<Interview> Interviews { get; set; }
     }
