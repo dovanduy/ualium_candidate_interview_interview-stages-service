@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterviewStagesService", "InterviewStagesService\InterviewStagesService.csproj", "{E98F73CB-C845-4007-8A19-D6C6D4975517}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InterviewStagesServiceContract", "InterviewStagesServiceContract", "{3B3DA7FF-BE94-4470-BC3C-5397D0D79977}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InterviewStagesService", "InterviewStagesService", "{3B3DA7FF-BE94-4470-BC3C-5397D0D79977}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InterviewStagesServiceContract", "InterviewStagesServiceContract\InterviewStagesServiceContract.csproj", "{CD8B05EB-27DB-4F71-8C7F-B413AC894E37}"
 EndProject

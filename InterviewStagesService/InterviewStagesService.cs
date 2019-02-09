@@ -3,6 +3,7 @@ using NLog;
 using System;
 using Ualium.Candidate.Interview.InterviewStagesService.Handlers;
 using Ualium.ServiceConfigurator;
+using EmployerInterviewStagesServiceContract = Ualium.Employer.Interview.EmployerInterviewStagesServiceContract;
 
 namespace Ualium.Candidate.Interview.InterviewStagesService
 {
@@ -108,6 +109,51 @@ namespace Ualium.Candidate.Interview.InterviewStagesService
                 });
 
                 /* Events */
+                x.ReceiveEndpoint(host, EmployerInterviewStagesServiceContract.RabbitMqQueues.Ualium_External_Employer_Interview_AcceptedInterviewRequest_Event, e =>
+                {
+                    e.PrefetchCount = 50;
+                    //e.Consumer<>();
+                });
+
+                x.ReceiveEndpoint(host, EmployerInterviewStagesServiceContract.RabbitMqQueues.Ualium_External_Employer_Interview_DeclinedInterviewRequest_Event, e =>
+                {
+                    e.PrefetchCount = 50;
+                    //e.Consumer<>();
+                });
+
+
+                x.ReceiveEndpoint(host, EmployerInterviewStagesServiceContract.RabbitMqQueues.Ualium_Internal_Employer_Interview_AcceptedInterview_Event, e =>
+                {
+                    e.PrefetchCount = 50;
+                    //e.Consumer<>();
+                });
+
+                x.ReceiveEndpoint(host, EmployerInterviewStagesServiceContract.RabbitMqQueues.Ualium_Internal_Employer_Interview_DeclinedInterview_Event, e =>
+                {
+                    e.PrefetchCount = 50;
+                    //e.Consumer<>();
+                });
+
+
+                x.ReceiveEndpoint(host, EmployerInterviewStagesServiceContract.RabbitMqQueues.Ualium_External_Employer_Interview_AcceptedOffer_Event, e =>
+                {
+                    e.PrefetchCount = 50;
+                    //e.Consumer<>();
+                });
+
+                x.ReceiveEndpoint(host, EmployerInterviewStagesServiceContract.RabbitMqQueues.Ualium_External_Employer_Interview_DeclinedOffer_Event, e =>
+                {
+                    e.PrefetchCount = 50;
+                    //e.Consumer<>();
+                });
+
+
+                x.ReceiveEndpoint(host, EmployerInterviewStagesServiceContract.RabbitMqQueues.Ualium_Internal_Employer_Interview_LeftInterviewFeedback_Event, e =>
+                {
+                    e.PrefetchCount = 50;
+                    //e.Consumer<>();
+                });
+
             });
         }
 

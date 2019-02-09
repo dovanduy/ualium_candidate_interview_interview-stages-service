@@ -31,7 +31,7 @@ namespace Ualium.Candidate.Interview.InterviewStagesService.Handlers
 
                         insertInterviewStageCmd.Parameters.AddWithValue("CandidateId", context.Message.CandidateId);
                         insertInterviewStageCmd.Parameters.AddWithValue("EmployerPositionId", context.Message.EmployerPositionId);
-                        insertInterviewStageCmd.Parameters.AddWithValue("WhenAcceptedUtc", context.Message.WhenStatusChangedUtc);
+                        insertInterviewStageCmd.Parameters.AddWithValue("WhenStatusChangedUtc", context.Message.WhenStatusChangedUtc);
 
                         var insertInterviewStageSql = @" 
                             DECLARE @CandidateInterviewStageId uniqueidentifier = '00000000-0000-0000-0000-000000000000';
@@ -46,8 +46,8 @@ namespace Ualium.Candidate.Interview.InterviewStagesService.Handlers
 
                                 SET @CandidateInterviewStageId = NEWID();
 
-                                INSERT INTO [dbo].[CandidateInterviewStages] (CandidateInterviewStageId, CandidateId, EmployerPositionId, WhenAcceptedUtc)
-                                  VALUES (@CandidateInterviewStageId, @CandidateId, @EmployerPositionId, @WhenAcceptedUtc)
+                                INSERT INTO [dbo].[CandidateInterviewStages] (CandidateInterviewStageId, CandidateId, EmployerPositionId, WhenStatusChangedUtc)
+                                  VALUES (@CandidateInterviewStageId, @CandidateId, @EmployerPositionId, @WhenStatusChangedUtc)
                             COMMIT;
 
                             IF (@CandidateInterviewStageId != '00000000-0000-0000-0000-000000000000')
@@ -79,7 +79,7 @@ namespace Ualium.Candidate.Interview.InterviewStagesService.Handlers
                         insertInterviewCmd.Parameters.AddWithValue("InterviewStageEnum", InterviewStageEnum.PhoneInterview);
                         insertInterviewCmd.Parameters.AddWithValue("InterviewStatusEnum", InterviewStatusEnum.CandidateEmployerAccepted);
                         insertInterviewCmd.Parameters.AddWithValue("WhenStatusChangedUtc", context.Message.WhenStatusChangedUtc);
-                        insertInterviewCmd.Parameters.AddWithValue("CandidateInterviewStage_CandidateInterviewStageId", candidateInterviewStageId);
+                        insertInterviewCmd.Parameters.AddWithValue("CandidateInterviewStageId", candidateInterviewStageId);
 
                         var insertInterviewSql = @"
                             DECLARE @InterviewId uniqueidentifier = NEWID();
@@ -90,10 +90,10 @@ namespace Ualium.Candidate.Interview.InterviewStagesService.Handlers
                                   1
                                 FROM [dbo].[Interviews]
                                 WITH (UPDLOCK)
-                                WHERE CandidateInterviewStage_CandidateInterviewStageId = @CandidateInterviewStage_CandidateInterviewStageId)
+                                WHERE CandidateInterviewStage_CandidateInterviewStageId = @CandidateInterviewStageId)
 
                                 INSERT INTO [dbo].[Interviews] (InterviewId, InterviewStageEnum, InterviewStatusEnum, WhenStatusChangedUtc, CandidateInterviewStage_CandidateInterviewStageId)
-                                  VALUES (@InterviewId, @InterviewStageEnum, @InterviewStatusEnum, @WhenStatusChangedUtc, @CandidateInterviewStage_CandidateInterviewStageId)
+                                  VALUES (@InterviewId, @InterviewStageEnum, @InterviewStatusEnum, @WhenStatusChangedUtc, @CandidateInterviewStageId)
                             COMMIT;";
 
                         insertInterviewCmd.CommandText = insertInterviewSql;

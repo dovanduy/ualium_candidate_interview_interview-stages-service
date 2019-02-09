@@ -29,6 +29,7 @@ namespace Ualium.Candidate.Interview.InterviewStagesService.Handlers
                         connection.Open();
 
                         var insertInterviewCmd = connection.CreateCommand();
+                        insertInterviewCmd.Parameters.AddWithValue("CandidateInterviewStageId", context.Message.CandidateInterviewStageId);
                         insertInterviewCmd.Parameters.AddWithValue("CandidateId", context.Message.CandidateId);
                         insertInterviewCmd.Parameters.AddWithValue("EmployerPositionId", context.Message.EmployerPositionId);
                         insertInterviewCmd.Parameters.AddWithValue("WhenStatusChangedUtc", context.Message.WhenStatusChangedUtc);
@@ -44,10 +45,10 @@ namespace Ualium.Candidate.Interview.InterviewStagesService.Handlers
                                   1
                                 FROM [dbo].[Interviews]
                                 WITH (UPDLOCK)
-                                WHERE CandidateInterviewStage_CandidateInterviewStageId = @EmployerPositionId)
+                                WHERE CandidateInterviewStage_CandidateInterviewStageId = @CandidateInterviewStageId)
 
                                 INSERT INTO [dbo].[Interviews] (InterviewId, InterviewStageEnum, InterviewStatusEnum, WhenStatusChangedUtc, CandidateInterviewStage_CandidateInterviewStageId)
-                                  VALUES (@InterviewId, @InterviewStageEnum, @InterviewStatusEnum, @WhenStatusChangedUtc, @CandidateInterviewStage_CandidateInterviewStageId)
+                                  VALUES (@InterviewId, @InterviewStageEnum, @InterviewStatusEnum, @WhenStatusChangedUtc, @CandidateInterviewStageId)
                             COMMIT;";
 
                         insertInterviewCmd.CommandText = insertInterviewSql;

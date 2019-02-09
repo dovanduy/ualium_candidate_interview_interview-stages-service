@@ -31,6 +31,7 @@ namespace Ualium.Candidate.Interview.InterviewStagesService.Handlers
 
                         var insertInterviewCmd = connection.CreateCommand();
                         insertInterviewCmd.Parameters.AddWithValue("CandidateId", context.Message.CandidateId);
+                        insertInterviewCmd.Parameters.AddWithValue("CandidateInterviewStageId", context.Message.CandidateInterviewStageId);
                         insertInterviewCmd.Parameters.AddWithValue("WhenStatusChangedUtc", context.Message.WhenStatusChangedUtc);
                         insertInterviewCmd.Parameters.AddWithValue("InterviewStageEnum", context.Message.InterviewStageEnum);
                         insertInterviewCmd.Parameters.AddWithValue("InterviewStatusEnum", InterviewStatusEnum.CandidateDeclinedEmployerPending);
@@ -45,12 +46,12 @@ namespace Ualium.Candidate.Interview.InterviewStagesService.Handlers
                                   1
                                 FROM [dbo].[Interviews]
                                 WITH (UPDLOCK)
-                                WHERE CandidateInterviewStage_CandidateInterviewStageId = @CandidateInterviewStage_CandidateInterviewStageId)
+                                WHERE CandidateInterviewStage_CandidateInterviewStageId = @CandidateInterviewStageId)
 
                                 SET @InterviewId = NEWID();
 
                                 INSERT INTO [dbo].[Interviews] (InterviewId, InterviewStageEnum, InterviewStatusEnum, WhenStatusChangedUtc, CandidateInterviewStage_CandidateInterviewStageId)
-                                  VALUES (@InterviewId, @InterviewStageEnum, @InterviewStatusEnum, @WhenStatusChangedUtc, @CandidateInterviewStage_CandidateInterviewStageId)
+                                  VALUES (@InterviewId, @InterviewStageEnum, @InterviewStatusEnum, @WhenStatusChangedUtc, @CandidateInterviewStageId)
                             COMMIT;
 
                             SELECT @InterviewId;";
@@ -66,8 +67,8 @@ namespace Ualium.Candidate.Interview.InterviewStagesService.Handlers
 
                         connection.Close();
 
-                        context.Respond(new AcceptInterviewCommandResponse
-                        {
+                        context.Respond(new DeclineInterviewCommandResponse
+                        {     
                             InterviewId = interviewId
                         });
                     }
@@ -78,7 +79,7 @@ namespace Ualium.Candidate.Interview.InterviewStagesService.Handlers
 
                     Logger.Error($"{message} {ex.Message}");
 
-                    var response = new AcceptInterviewCommandResponse {Errors = new List<Error>()};
+                    var response = new DeclineInterviewCommandResponse { Errors = new List<Error>()};
                     response.Errors.Add(new Error(23001, ex.Message, message));
 
                     throw new Exception(message, ex);

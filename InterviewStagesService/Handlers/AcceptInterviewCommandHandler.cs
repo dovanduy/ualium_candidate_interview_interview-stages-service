@@ -19,9 +19,8 @@ namespace Ualium.Candidate.Interview.InterviewStagesService.Handlers
             await Task.Factory.StartNew(() =>
             {
                 /*
-                * Create New Candidate Interview which is part of CandidateInterviewStage and is Initiated
-                * when Candidate Accepts/Declines Employer Interview request.
-                */
+                 * Initiated  when Candidate Accepts/Declines Employer Interview request.
+                 */
                 try
                 {
                     using (var connection = new SqlConnection(InterviewStagesServiceDbContext.Connectionstring.GetConnection))
@@ -30,11 +29,10 @@ namespace Ualium.Candidate.Interview.InterviewStagesService.Handlers
                         connection.Open();
 
                         var insertInterviewCmd = connection.CreateCommand();
-                        insertInterviewCmd.Parameters.AddWithValue("CandidateId", context.Message.CandidateId);
                         insertInterviewCmd.Parameters.AddWithValue("WhenStatusChangedUtc", context.Message.WhenStatusChangedUtc);
                         insertInterviewCmd.Parameters.AddWithValue("InterviewStageEnum", context.Message.InterviewStageEnum);
                         insertInterviewCmd.Parameters.AddWithValue("InterviewStatusEnum", InterviewStatusEnum.CandidateAcceptedEmployerPending);
-                        insertInterviewCmd.Parameters.AddWithValue("CandidateInterviewStage_CandidateInterviewStageId", context.Message.CandidateInterviewStageId);
+                        insertInterviewCmd.Parameters.AddWithValue("CandidateInterviewStageId", context.Message.CandidateInterviewStageId);
 
                         var insertInterviewSql = @"
                             DECLARE @InterviewId uniqueidentifier = '00000000-0000-0000-0000-000000000000';
@@ -45,12 +43,12 @@ namespace Ualium.Candidate.Interview.InterviewStagesService.Handlers
                                   1
                                 FROM [dbo].[Interviews]
                                 WITH (UPDLOCK)
-                                WHERE CandidateInterviewStage_CandidateInterviewStageId = @CandidateInterviewStage_CandidateInterviewStageId)
+                                WHERE CandidateInterviewStage_CandidateInterviewStageId = @CandidateInterviewStageId)
 
                                 SET @InterviewId = NEWID();
 
                                 INSERT INTO [dbo].[Interviews] (InterviewId, InterviewStageEnum, InterviewStatusEnum, WhenInterWhenStatusChangedUtcviewStatusChanged, CandidateInterviewStage_CandidateInterviewStageId)
-                                  VALUES (@InterviewId, @InterviewStageEnum, @InterviewStatusEnum, @WhenStatusChangedUtc, @CandidateInterviewStage_CandidateInterviewStageId)
+                                  VALUES (@InterviewId, @InterviewStageEnum, @InterviewStatusEnum, @WhenStatusChangedUtc, @CandidateInterviewStageId)
                             COMMIT;
 
                             SELECT @InterviewId;";
