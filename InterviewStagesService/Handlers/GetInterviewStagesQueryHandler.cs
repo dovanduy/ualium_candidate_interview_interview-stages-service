@@ -97,7 +97,7 @@ namespace Ualium.Candidate.Interview.InterviewStagesService.Handlers
                                 InterviewId = reader.GetGuid(0),
                                 InterviewStageEnum = reader.GetInt32(1),
                                 InterviewStatusEnum = reader.GetInt32(2),
-                                WhenInterviewCompleted = reader.GetDateTime(3)
+                                WhenStatusChangedUtc = reader.GetDateTime(3)
                             });
                         }
 

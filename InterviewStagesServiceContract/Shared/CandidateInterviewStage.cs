@@ -18,7 +18,7 @@ namespace Ualium.Candidate.Interview.CandidateInterviewStagesServiceContract.Sha
         public Feedback EmployerFeedback { get; set; }
         public int InterviewStageEnum { get; set; }
         public int InterviewStatusEnum { get; set; }
-        public DateTime WhenInterviewCompleted { get; set; }
+        public DateTime WhenStatusChangedUtc { get; set; }
     }
 
     public class Feedback

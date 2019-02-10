@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using MassTransit;
 using NLog;
 using Ualium.Candidate.Interview.CandidateInterviewStagesServiceContract.Commands;
+using Ualium.Candidate.Interview.CandidateInterviewStagesServiceContract.Event;
 using Ualium.Candidate.Interview.CandidateInterviewStagesServiceContract.Shared;
 using Ualium.Candidate.Interview.InterviewStagesService.Entities;
 
@@ -68,6 +69,14 @@ namespace Ualium.Candidate.Interview.InterviewStagesService.Handlers
                         {
                             InterviewId = interviewId
                         });
+
+                        var publish = InterviewStagesService.Bus.Publish(new AcceptedInterviewEvent
+                        {
+                            //CandidateInterviewStage = 
+                        });
+
+                        publish.Wait();
+
                     }
                 }
                 catch (Exception ex)

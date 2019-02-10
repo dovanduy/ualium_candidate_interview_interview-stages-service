@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using MassTransit;
 using NLog;
 using Ualium.Candidate.Interview.CandidateInterviewStagesServiceContract.Commands;
+using Ualium.Candidate.Interview.CandidateInterviewStagesServiceContract.Event;
 using Ualium.Candidate.Interview.CandidateInterviewStagesServiceContract.Shared;
 using Ualium.Candidate.Interview.InterviewStagesService.Entities;
 
@@ -19,15 +20,15 @@ namespace Ualium.Candidate.Interview.InterviewStagesService.Handlers
             await Task.Factory.StartNew(() =>
             {
                 /*
-                * Save Candidate Interview Stage - Initiated when Candidate Accepts Employer Interview Request
-                */
+                 * Save Candidate Interview Stage - Initiated when Candidate Accepts Employer Interview Request
+                 */
                 try
                 {
                     using (var connection = new SqlConnection(InterviewStagesServiceDbContext.Connectionstring.GetConnection))
                     {
                         connection.Open();
 
-                        var insertInterviewStageCmd  = connection.CreateCommand();
+                        var insertInterviewStageCmd = connection.CreateCommand();
 
                         insertInterviewStageCmd.Parameters.AddWithValue("CandidateId", context.Message.CandidateId);
                         insertInterviewStageCmd.Parameters.AddWithValue("EmployerPositionId", context.Message.EmployerPositionId);
@@ -105,6 +106,13 @@ namespace Ualium.Candidate.Interview.InterviewStagesService.Handlers
                         {
                             InterviewStageId = candidateInterviewStageId
                         });
+
+                        var publish = InterviewStagesService.Bus.Publish(new AcceptedInterviewRequestEvent
+                        {
+                            EmployerPositionId = Guid.Empty
+                        });
+
+                        publish.Wait();
                     }
                 }
                 catch (Exception ex)
@@ -113,7 +121,7 @@ namespace Ualium.Candidate.Interview.InterviewStagesService.Handlers
 
                     Logger.Error($"{message} {ex.Message}");
 
-                    var response = new AcceptInterviewRequestCommandResponse { Errors = new List<Error>() };
+                    var response = new AcceptInterviewRequestCommandResponse {Errors = new List<Error>()};
                     response.Errors.Add(new Error(23001, ex.Message, message));
 
                     throw new Exception(message, ex);
