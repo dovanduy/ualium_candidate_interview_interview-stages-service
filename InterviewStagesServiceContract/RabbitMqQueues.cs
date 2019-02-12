@@ -17,8 +17,6 @@ namespace Ualium.Candidate.Interview.CandidateInterviewStagesServiceContract
         public static string Ualium_External_Candidate_Interview_DeclineOffer_Command => "Ualium_External_Candidate_Interview_DeclineOffer_Command";
 
         public static string Ualium_External_Candidate_Interview_GetInterviewStages_Query => "Ualium_External_Candidate_Interview_GetInterviewStages_Query";
-        public static string Ualium_External_Candidate_Interview_GetInterviewStage_Query => "Ualium_External_Candidate_Interview_GetInterviewStage_Query";
-
 
         public static string Ualium_External_Candidate_Interview_AcceptedInterviewRequest_Event => "Ualium_External_Candidate_Interview_AcceptedInterviewRequest_Event";
         public static string Ualium_External_Candidate_Interview_DeclinedInterviewRequest_Event => "Ualium_External_Candidate_Interview_DeclinedInterviewRequest_Event";

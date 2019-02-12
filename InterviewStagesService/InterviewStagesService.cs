@@ -96,12 +96,6 @@ namespace Ualium.Candidate.Interview.InterviewStagesService
 
 
                 /* Queries */
-                x.ReceiveEndpoint(host, CandidateInterviewStagesServiceContract.RabbitMqQueues.Ualium_External_Candidate_Interview_GetInterviewStage_Query, e =>
-                {
-                    e.PrefetchCount = 50;
-                    e.Consumer<GetInterviewStageQueryHandler>();
-                });
-
                 x.ReceiveEndpoint(host, CandidateInterviewStagesServiceContract.RabbitMqQueues.Ualium_External_Candidate_Interview_GetInterviewStages_Query, e =>
                 {
                     e.PrefetchCount = 50;

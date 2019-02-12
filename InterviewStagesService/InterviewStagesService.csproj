@@ -47,11 +47,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CandidateInterviewStagesServiceContract, Version=1.0.26.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Ualium.Candidate.Interview.CandidateInterviewStagesServiceContract.1.0.26\lib\netstandard2.0\CandidateInterviewStagesServiceContract.dll</HintPath>
+    <Reference Include="CandidateInterviewStagesServiceContract, Version=1.0.27.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ualium.Candidate.Interview.CandidateInterviewStagesServiceContract.1.0.27\lib\netstandard2.0\CandidateInterviewStagesServiceContract.dll</HintPath>
     </Reference>
-    <Reference Include="EmployerInterviewStagesServiceContract, Version=1.0.13.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Ualium.Employer.Interview.EmployerInterviewStagesServiceContract.1.0.13\lib\netstandard2.0\EmployerInterviewStagesServiceContract.dll</HintPath>
+    <Reference Include="EmployerInterviewStagesServiceContract, Version=1.0.14.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ualium.Employer.Interview.EmployerInterviewStagesServiceContract.1.0.14\lib\netstandard2.0\EmployerInterviewStagesServiceContract.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -194,7 +194,6 @@
     <Compile Include="Entities\InterviewStageEnum.cs" />
     <Compile Include="Entities\InterviewStatusEnum.cs" />
     <Compile Include="Handlers\GetInterviewStagesQueryHandler.cs" />
-    <Compile Include="Handlers\GetInterviewStageQueryHandler.cs" />
     <Compile Include="Handlers\LeaveInterviewFeedbackCommandHandler.cs" />
     <Compile Include="Handlers\DeclineOfferCommandHandler.cs" />
     <Compile Include="Handlers\AcceptOfferCommandHandler.cs" />
